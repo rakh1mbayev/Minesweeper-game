@@ -16,7 +16,7 @@ func main() {
 	// input data
 	fmt.Scanln(&n, &m)
 
-	createField()
+	createField() // initialization
 
 	for i := 0; i < n; i++ {
 		var s string
@@ -36,23 +36,26 @@ func main() {
 		fmt.Scan(&x)
 		fmt.Print(" ")
 		fmt.Scan(&y)
+
 		moves_count++
+		x--
+		y--
 
 		if first_touch {
 			first_touch = false
 			calculate()
 		}
-
-		if postmatrix[x-1][y-1] == -1 {
-			us[x-1][y-1] = true
+		us[x][y] = true
+		if postmatrix[x][y] == -1 {
 			win = false
 			break
 		}
-		if postmatrix[x-1][y-1] == 0 {
-			blankTravel(x-1, y-1)
+		if postmatrix[x][y] == 0 {
+			us[x][y] = false
+			blankTravel(x, y)
 		}
-		us[x-1][y-1] = true
 	}
+
 	OutPutting()
 	statistics(win)
 }
