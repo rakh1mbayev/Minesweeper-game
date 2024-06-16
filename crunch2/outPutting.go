@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func OutPutting() {
+func ceiling() {
 	fmt.Print("   ")
 	for i := 0; i < m; i++ {
 		fmt.Print("   ", i+1, "   ")
@@ -10,17 +10,21 @@ func OutPutting() {
 	fmt.Println()
 
 	fmt.Print("   ")
-	ceiling := "_______"
+	roof := "_______"
 	for i := 0; i < m; i++ {
-		fmt.Print(ceiling)
+		fmt.Print(roof)
 		if i+1 < m {
 			fmt.Print("_")
 		}
 	}
 	fmt.Println()
+}
 
-	distn := n * 3
-	distm := m*7 + 6
+func OutPutting() {
+
+	ceiling()
+	distn := n * 3       // total distance to last row
+	distm := (m + 1) * 7 // total distance to last column
 	x := 0
 	y := 0
 	for i := 0; i < distn; i++ {
@@ -28,7 +32,7 @@ func OutPutting() {
 			x++
 		}
 		y = 0
-		for j := 0; j < distm+1; j++ {
+		for j := 0; j < distm; j++ {
 			if j == 0 {
 				if i%3 == 1 {
 					fmt.Print(x)
