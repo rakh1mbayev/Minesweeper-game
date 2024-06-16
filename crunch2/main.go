@@ -13,35 +13,28 @@ var (
 
 func main() {
 
-	// input data
-	fmt.Scanln(&n, &m)
-
-	createField() // initialization
-
-	for i := 0; i < n; i++ {
-		var s string
-		fmt.Scanln(&s)
-		for j := 0; j < m; j++ {
-			matrix[i][j] = rune(s[j])
-		}
-	}
+	greeting()
 
 	var x, y int
-	var first_touch bool = true
-	win := true
-	for moves_count+bombs_count < n*m {
-		OutPutting()
+	var first_touch, win bool = true, true
+	total_cell := n * m
+	for moves_count+bombs_count < total_cell {
 
-		fmt.Print("Enter coordinates: ")
-		fmt.Scan(&x)
-		fmt.Print(" ")
-		fmt.Scan(&y)
+		x, y = inputData(true)
 
-		moves_count++
 		x--
 		y--
 
+		if us[x][y] {
+			fmt.Println("Error: you are already selected this cell.")
+			continue
+		}
+
+		moves_count++
 		if first_touch {
+			if matrix[x][y] == '*' {
+				replace(x, y)
+			}
 			first_touch = false
 			calculate()
 		}
